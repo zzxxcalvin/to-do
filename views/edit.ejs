@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>To Do</title>
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" style="color:black;text-decoration: none;" ><H1>Hello, TODO</H1></a>
+
+        <form action="/add-todo" method="POST">
+            <div class="d-flex align-items-center">
+                <input name="item" autofocus autocomplete="off" class="form-control mr-3" type="text" style="flex: 1;">
+                <button class="btn btn-primary">新增項目</button>
+            </div>
+        </form>
+        <ul class="list-group">
+            <% items.forEach((item)=>{ %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <% if(id == item._id) { %>
+                        <form class="d-flex justify-content-between align-items-center" action=<%="/update/" + item._id%> method="POST">
+                            <input size='160' style='width:85%;margin:-3px;' name="task" type="text" >
+                            <button type="submit" class="btn btn-secondary btn-sm mr-1">Update</button>   
+                        </form> 
+                        <a href= <%="/delete/" + item._id%>  class="btn btn-danger btn-sm">delete </a>
+                    <% } else { %> 
+                    <span><%= item.task %></span>
+                    <div>
+                        <!-- <button id=<%=item._id%> class="btn btn-secondary btn-sm mr-1">edit</button> -->
+                        <a href= <%="/edit/" + item._id%>  class="btn btn-secondary btn-sm mr-1">edit</a>
+                        <a href= <%="/delete/" + item._id%>  class="btn btn-danger btn-sm">delete </a>
+                        <!-- <button id=<%=item._id%> class="btn btn-danger btn-sm">delete</button> -->
+                    </div>
+                    <% } %> 
+                 </li>
+            <% }) %>
+
+        </ul>
+    </div>
+</body>
+
+</html>
